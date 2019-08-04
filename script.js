@@ -1,19 +1,34 @@
 let app = (() => {
 
     let itemList = [];
-    let isNumberReg = /^[1-9]\d*|0$/g;
+    let isNumberReg = /^[1-9]*|0$/;
+
+    function addButtonClick() {
+        clearErrorMessage();
+        addItem();
+    }
 
     function addItem() {
-        let addValue = document.getElementById('itemAddInput').value;
-        console.log(typeof addValue)
+        let addValue = parseInt(document.getElementById('itemAddInput').value);
+        let re = isNumberReg;
         if (!isNumberReg.test(addValue)) {
             setErrorMessage('数値を入力してください');
             return;
         }
+        if (isDupulicate(addValue)) {
+            setErrorMessage('その値は既に登録されています');
+            return;
+        }
 
-        console.log(addValue);
+        
         itemList.push(addValue);
         appendItemDOM();
+
+        document.getElementById('itemAddInput').value = "";
+    }
+
+    function isDupulicate(addValue) {
+        return itemList.includes(addValue);
     }
 
     function appendItemDOM() {
@@ -24,20 +39,21 @@ let app = (() => {
         newItemDOM.textContent = newItem;
 
         itemListDOM.appendChild(newItemDOM);
-        
+        console.log('add item');
+        console.log(itemList);
     }
 
     function setErrorMessage(message) {
-        let errorDOM = document.createElement('p');
-        errorDOM.textContent = message;
-
-        document.getElementById('resultText').appendChild(errorDOM);
+        document.getElementById('errorMessageText').textContent = message;
+    }
+    function clearErrorMessage() {
+        document.getElementById('errorMessageText').textContent = "";
     }
 
     return {
 
         init() {
-            document.getElementById('addButton').addEventListener('click', addItem);
+            document.getElementById('addButton').addEventListener('click', addButtonClick);
             document.getElementById('searchButton').addEventListener('click', (event) =>{
                 console.log('searchutton Clicked');
             });
