@@ -8,4 +8,10 @@ body {
   color: #4d464f;
   border-radius: 10px; }
 
+.searchedItem {
+  color: #e3e3e3; }
+
+.targetItem {
+  color: red; }
+
 /*# sourceMappingURL=style.css.map */

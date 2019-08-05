@@ -1,16 +1,19 @@
 let app = (() => {
 
     let itemList = [];
-    let isNumberReg = /^[1-9]*|0$/;
+    let isNumberReg = /^[1-9]+|0$/;
 
     function addButtonClick() {
         clearErrorMessage();
         addItem();
     }
+    function searchButtonClick() {
+        console.log('searchButton clicked');
+        searchItem();
+    }
 
     function addItem() {
-        let addValue = parseInt(document.getElementById('itemAddInput').value);
-        let re = isNumberReg;
+        let addValue = document.getElementById('itemAddInput').value;
         if (!isNumberReg.test(addValue)) {
             setErrorMessage('数値を入力してください');
             return;
@@ -20,7 +23,6 @@ let app = (() => {
             return;
         }
 
-        
         itemList.push(addValue);
         appendItemDOM();
 
@@ -35,12 +37,11 @@ let app = (() => {
         let itemListDOM = document.getElementById('itemList');
 
         let newItemDOM = document.createElement('li');
+        newItemDOM.setAttribute('id', 'item-' + (itemList.length -1));
         let newItem = itemList[itemList.length -1];
         newItemDOM.textContent = newItem;
 
         itemListDOM.appendChild(newItemDOM);
-        console.log('add item');
-        console.log(itemList);
     }
 
     function setErrorMessage(message) {
@@ -50,13 +51,24 @@ let app = (() => {
         document.getElementById('errorMessageText').textContent = "";
     }
 
+    function searchItem() {
+        console.log('searchItem called');
+        let target = document.getElementById('searchText').value;
+
+        itemList.forEach((element, index) => {
+            if (element === target) {
+                document.getElementById('item-' + index).setAttribute('class', 'targetItem');
+                return;
+            }
+            document.getElementById('item-' + index).setAttribute('class', 'searchedItem');
+        });
+    }
+
     return {
 
         init() {
             document.getElementById('addButton').addEventListener('click', addButtonClick);
-            document.getElementById('searchButton').addEventListener('click', (event) =>{
-                console.log('searchutton Clicked');
-            });
+            document.getElementById('searchButton').addEventListener('click', searchButtonClick);
         }
 
     }
