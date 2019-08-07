@@ -13,11 +13,12 @@ let app = (() => {
     }
     function searchButtonClick() {
         // styleをクリアする処理が必要
+        clearErrorMessage();
         searchItem();
     }
     function generateButtonClick() {
-        // エラーメッセージのクリア
-        // 要素自動生成
+        clearErrorMessage();
+        generateItem();
     }
     // end イベント
 
@@ -39,7 +40,7 @@ let app = (() => {
             return;
         }
 
-        itemList.push(addValue);
+        itemList.push(parseInt(addValue));
         appendItemDOM();
 
         //連続で入力することを想定しているので、毎回入力部はクリア
@@ -48,14 +49,30 @@ let app = (() => {
 
     function generateItem() {
         // 生成個数
-
+        let generateCount = document.getElementById('generateCount').value
         // 生成範囲
+        let generateRange = document.getElementById('generateRange').value;
 
-        // for 生成個数
+        if (!validateNumericInput(generateCount) || !validateNumericInput(generateRange)) {
+            return;
+        }
+        if (!validateGenerateCountLtRange()) {
 
-        // 重複したら作り直し
-        
+        }
+
+        for (let i = 0; i < generateCount; i++) {
+            let generatedValue = Math.floor(Math.random() * generateRange) + 1;
+
+            while(itemList.includes(generatedValue)) {
+                generatedValue = Math.floor(Math.random() * generateRange) + 1;
+            }
+            console.log('insert value is ' + generatedValue);
+            itemList.push(generatedValue);
+            appendItemDOM();
+        }
+
         // 更新されたitemListを反映させるためにappendItemDOMを呼び出す
+        
     }
 
     /**
@@ -81,10 +98,18 @@ let app = (() => {
     function searchItem() {
         // 探索要素
         let target = document.getElementById('searchText').value;
+        //バリデーション
+        if (!validateNumericInput(target)) {
+            return;
+        }
+        target = parseInt(target);
 
         // リストを探索し、ヒットするまでは文字色をグレーにし、ヒットしたら該当文字色を赤にして
         // 以降の処理は全てスキップ
         itemList.forEach((element, index) => {
+            console.log('loop start');
+            console.log('element: ' + typeof element);
+            console.log('target : ' + typeof target);
             // 該当要素が存在するか
             if (element === target) {
                 document.getElementById('item-' + index).setAttribute('class', 'targetItem');
@@ -120,6 +145,13 @@ let app = (() => {
     function validateDupulicateInput(value) {
         if (itemList.includes(value)) {
             setErrorMessage('その値は既に登録されています');
+            return false;
+        }
+        return true;
+    }
+    function validateGenerateCountLtRange(generateCount, generateRange) {
+        if (generateCount > generateRange) {
+            setErrorMessage('生成個数が生成範囲を超えています');
             return false;
         }
         return true;
