@@ -15,6 +15,10 @@ let app = (() => {
         // styleをクリアする処理が必要
         searchItem();
     }
+    function generateButtonClick() {
+        // エラーメッセージのクリア
+        // 要素自動生成
+    }
     // end イベント
 
 
@@ -40,6 +44,18 @@ let app = (() => {
 
         //連続で入力することを想定しているので、毎回入力部はクリア
         document.getElementById('itemAddInput').value = "";
+    }
+
+    function generateItem() {
+        // 生成個数
+
+        // 生成範囲
+
+        // for 生成個数
+
+        // 重複したら作り直し
+        
+        // 更新されたitemListを反映させるためにappendItemDOMを呼び出す
     }
 
     /**
@@ -133,6 +149,7 @@ let app = (() => {
         init() {
             document.getElementById('addButton').addEventListener('click', addButtonClick);
             document.getElementById('searchButton').addEventListener('click', searchButtonClick);
+            document.getElementById('generateButton').addEventListener('click', generateButtonClick);
         }
 
     }
