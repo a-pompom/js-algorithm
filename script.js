@@ -1,8 +1,11 @@
+import Validator from './validator.js';
+
 let app = (() => {
+    
 
     let itemList = [];
-    // 半角数値のみを入力として受け付ける
-    let isNumberReg = /^[1-9]+|0$/;
+
+    let validator;
 
     let matched = false;
 
@@ -33,10 +36,14 @@ let app = (() => {
         let addValue = document.getElementById('itemAddInput').value;
         
         //バリデーション
-        if (!validateNumericInput(addValue)) {
+        if (!validator.validateNumericInput(addValue)) {
+            setErrorMessage('数値を入力してください');
             return;
         }
-        if (!validateDupulicateInput(addValue)) {
+        addValue = parseInt(addValue);
+
+        if (!validator.validateDupulicateInput(addValue, itemList)) {
+            setErrorMessage('その値は既に登録されています');
             return;
         }
 
@@ -59,14 +66,16 @@ let app = (() => {
         let generateRange = document.getElementById('generateRange').value;
 
         // 数値か
-        if (!validateNumericInput(generateCount) || !validateNumericInput(generateRange)) {
+        if (!validator.validateNumericInput(generateCount) || !validator.validateNumericInput(generateRange)) {
+            setErrorMessage('数値を入力してください');
             return;
         }
-        generateCount = ParseInt(generateCount);
-        generateRange = ParseInt(generateRange);
+        generateCount = parseInt(generateCount);
+        generateRange = parseInt(generateRange);
 
         // 生成個数が生成範囲より十分に小さいか
-        if (!validateGenerateCountLtRange()) {
+        if (!validator.validateGenerateCountLtRange()) {
+            setErrorMessage('生成個数が多すぎます');
             return;
         }
 
@@ -107,7 +116,7 @@ let app = (() => {
         // 探索要素
         let target = document.getElementById('searchText').value;
         //バリデーション
-        if (!validateNumericInput(target)) {
+        if (!validator.validateNumericInput(target)) {
             return;
         }
         target = parseInt(target);
@@ -130,45 +139,7 @@ let app = (() => {
     }
 
     // バリデーション処理
-    /**
-     * 入力値が数値か判定
-     * @param {String} value 入力値
-     * @returns 数値→true 数値でない→false
-     */
-    function validateNumericInput(value) {
-        if (!isNumberReg.test(value)) {
-            setErrorMessage('数値を入力してください');
-            return false;
-        }
-        return true;
-    }
-    /**
-     * 入力値が既にリストに登録済みか判定
-     * @param {String} value 入力値
-     * @returns リストに存在しない→true 既に存在→false
-     */
-    function validateDupulicateInput(value) {
-        if (itemList.includes(value)) {
-            setErrorMessage('その値は既に登録されています');
-            return false;
-        }
-        return true;
-    }
-    /**
-     * 生成個数が生成範囲より十分に小さいか判定する
-     * 生成個数が生成範囲に近い、もしくは超過している場合、ユニークな数を生成するために
-     * 無限ループに陥ってしまうので、範囲チェックを行う
-     * @param {Number} generateCount 生成個数
-     * @param {Number} generateRange 生成範囲
-     */
-    function validateGenerateCountLtRange(generateCount, generateRange) {
-        if (generateCount * 1.5 > generateRange) {
-            setErrorMessage('生成個数が多すぎます');
-            return false;
-        }
-        return true;
-    }
-
+    
     // エラーメッセージ処理
     /**
      * エラーメッセージを設定
@@ -194,6 +165,8 @@ let app = (() => {
             document.getElementById('addButton').addEventListener('click', addButtonClick);
             document.getElementById('searchButton').addEventListener('click', searchButtonClick);
             document.getElementById('generateButton').addEventListener('click', generateButtonClick);
+
+            validator = new Validator();
         }
 
     }
