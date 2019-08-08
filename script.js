@@ -13,7 +13,12 @@ let app = (() => {
     }
     function searchButtonClick() {
         // styleをクリアする処理が必要
+        clearErrorMessage();
         searchItem();
+    }
+    function generateButtonClick() {
+        clearErrorMessage();
+        generateItem();
     }
     // end イベント
 
@@ -35,11 +40,47 @@ let app = (() => {
             return;
         }
 
-        itemList.push(addValue);
+        itemList.push(parseInt(addValue));
         appendItemDOM();
 
         //連続で入力することを想定しているので、毎回入力部はクリア
         document.getElementById('itemAddInput').value = "";
+    }
+
+    /**
+     * 探索要素を自動生成する
+     * ・生成個数...何個要素を生成するか
+     * ・生成範囲...1から生成範囲までの数値をランダムに生成
+     */
+    function generateItem() {
+        // 生成個数
+        let generateCount = document.getElementById('generateCount').value
+        // 生成範囲
+        let generateRange = document.getElementById('generateRange').value;
+
+        // 数値か
+        if (!validateNumericInput(generateCount) || !validateNumericInput(generateRange)) {
+            return;
+        }
+        generateCount = ParseInt(generateCount);
+        generateRange = ParseInt(generateRange);
+
+        // 生成個数が生成範囲より十分に小さいか
+        if (!validateGenerateCountLtRange()) {
+            return;
+        }
+
+        // ランダムに探索要素を生成
+        for (let i = 0; i < generateCount; i++) {
+            let generatedValue = Math.floor(Math.random() * generateRange) + 1;
+
+            while(itemList.includes(generatedValue)) {
+                generatedValue = Math.floor(Math.random() * generateRange) + 1;
+            }
+            itemList.push(generatedValue);
+            appendItemDOM();
+        }
+        
     }
 
     /**
@@ -65,6 +106,11 @@ let app = (() => {
     function searchItem() {
         // 探索要素
         let target = document.getElementById('searchText').value;
+        //バリデーション
+        if (!validateNumericInput(target)) {
+            return;
+        }
+        target = parseInt(target);
 
         // リストを探索し、ヒットするまでは文字色をグレーにし、ヒットしたら該当文字色を赤にして
         // 以降の処理は全てスキップ
@@ -108,6 +154,20 @@ let app = (() => {
         }
         return true;
     }
+    /**
+     * 生成個数が生成範囲より十分に小さいか判定する
+     * 生成個数が生成範囲に近い、もしくは超過している場合、ユニークな数を生成するために
+     * 無限ループに陥ってしまうので、範囲チェックを行う
+     * @param {Number} generateCount 生成個数
+     * @param {Number} generateRange 生成範囲
+     */
+    function validateGenerateCountLtRange(generateCount, generateRange) {
+        if (generateCount * 1.5 > generateRange) {
+            setErrorMessage('生成個数が多すぎます');
+            return false;
+        }
+        return true;
+    }
 
     // エラーメッセージ処理
     /**
@@ -133,6 +193,7 @@ let app = (() => {
         init() {
             document.getElementById('addButton').addEventListener('click', addButtonClick);
             document.getElementById('searchButton').addEventListener('click', searchButtonClick);
+            document.getElementById('generateButton').addEventListener('click', generateButtonClick);
         }
 
     }
