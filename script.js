@@ -47,31 +47,39 @@ let app = (() => {
         document.getElementById('itemAddInput').value = "";
     }
 
+    /**
+     * 探索要素を自動生成する
+     * ・生成個数...何個要素を生成するか
+     * ・生成範囲...1から生成範囲までの数値をランダムに生成
+     */
     function generateItem() {
         // 生成個数
         let generateCount = document.getElementById('generateCount').value
         // 生成範囲
         let generateRange = document.getElementById('generateRange').value;
 
+        // 数値か
         if (!validateNumericInput(generateCount) || !validateNumericInput(generateRange)) {
             return;
         }
-        if (!validateGenerateCountLtRange()) {
+        generateCount = ParseInt(generateCount);
+        generateRange = ParseInt(generateRange);
 
+        // 生成個数が生成範囲より十分に小さいか
+        if (!validateGenerateCountLtRange()) {
+            return;
         }
 
+        // ランダムに探索要素を生成
         for (let i = 0; i < generateCount; i++) {
             let generatedValue = Math.floor(Math.random() * generateRange) + 1;
 
             while(itemList.includes(generatedValue)) {
                 generatedValue = Math.floor(Math.random() * generateRange) + 1;
             }
-            console.log('insert value is ' + generatedValue);
             itemList.push(generatedValue);
             appendItemDOM();
         }
-
-        // 更新されたitemListを反映させるためにappendItemDOMを呼び出す
         
     }
 
@@ -149,9 +157,16 @@ let app = (() => {
         }
         return true;
     }
+    /**
+     * 生成個数が生成範囲より十分に小さいか判定する
+     * 生成個数が生成範囲に近い、もしくは超過している場合、ユニークな数を生成するために
+     * 無限ループに陥ってしまうので、範囲チェックを行う
+     * @param {Number} generateCount 生成個数
+     * @param {Number} generateRange 生成範囲
+     */
     function validateGenerateCountLtRange(generateCount, generateRange) {
-        if (generateCount > generateRange) {
-            setErrorMessage('生成個数が生成範囲を超えています');
+        if (generateCount * 1.5 > generateRange) {
+            setErrorMessage('生成個数が多すぎます');
             return false;
         }
         return true;
