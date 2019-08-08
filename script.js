@@ -115,9 +115,6 @@ let app = (() => {
         // リストを探索し、ヒットするまでは文字色をグレーにし、ヒットしたら該当文字色を赤にして
         // 以降の処理は全てスキップ
         itemList.forEach((element, index) => {
-            console.log('loop start');
-            console.log('element: ' + typeof element);
-            console.log('target : ' + typeof target);
             // 該当要素が存在するか
             if (element === target) {
                 document.getElementById('item-' + index).setAttribute('class', 'targetItem');
