@@ -1,26 +1,27 @@
 import Validator from './validator.js';
+import DomManipulator from './domManipulator.js';
 
 let app = (() => {
     
-
     let itemList = [];
 
     let validator;
+
+    let dom;
 
     let matched = false;
 
     // イベント
     function addButtonClick() {
-        clearErrorMessage();
+        clear();
         addItem();
     }
     function searchButtonClick() {
-        // styleをクリアする処理が必要
-        clearErrorMessage();
+        clear();
         searchItem();
     }
     function generateButtonClick() {
-        clearErrorMessage();
+        clear();
         generateItem();
     }
     // end イベント
@@ -97,16 +98,18 @@ let app = (() => {
      */
     function appendItemDOM() {
         // リストDOM
-        let itemListDOM = document.getElementById('itemList');
+        let itemListDOMId = 'itemList';
 
-        // liに固有のidを付与したul要素へ追加
-        let newItemDOM = document.createElement('li');
-        newItemDOM.setAttribute('id', 'item-' + (itemList.length -1));
+        // 探索要素のulにliを追加し、個々の要素に識別要素としてidを設定
+        let option = {
+            textContent: itemList[itemList.length -1],
+            element: 'li',
+            attributeName: 'id',
+            attributeValue: 'item-' + (itemList.length -1),
+            appendTargetId: itemListDOMId
+        };
 
-        let newItem = itemList[itemList.length -1];
-        newItemDOM.textContent = newItem;
-
-        itemListDOM.appendChild(newItemDOM);
+        dom.appendNewElement(option);
     }
 
     /**
@@ -126,13 +129,13 @@ let app = (() => {
         itemList.forEach((element, index) => {
             // 該当要素が存在するか
             if (element === target) {
-                document.getElementById('item-' + index).setAttribute('class', 'targetItem');
+                dom.setClass('item-' + index, 'targetItem');
                 matched = true;
                 return;
             }
             // マッチするまでは線形探索を続ける
             if (!matched) {
-                document.getElementById('item-' + index).setAttribute('class', 'searchedItem');
+                dom.setClass('item-' + index, 'searchedItem');
             }
             
         });
@@ -146,13 +149,33 @@ let app = (() => {
      * @param {String} message 表示するエラーメッセージ
      */
     function setErrorMessage(message) {
-        document.getElementById('errorMessageText').textContent = message;
+        dom.setMessage('errorMessageText', message);
     }
     /**
      * エラーメッセージをクリア
      */
     function clearErrorMessage() {
-        document.getElementById('errorMessageText').textContent = "";
+        dom.clearMessage('errorMessageText');
+    }
+
+    /**
+     * 要素に割り当てられたスタイルを初期化
+     */
+    function clearStyleClass() {
+
+        itemList.forEach((element, index) => {
+            dom.removeStyleClass('item-' + index, 'targetItem');
+            dom.removeStyleClass('item-' + index, 'searchedItem');
+        });
+    }
+
+    /**
+     * 再探索ができるようボタンクリックで毎回探索結果をクリア
+     */
+    function clear() {
+        clearErrorMessage();
+        clearStyleClass();
+        matched = false;
     }
 
     
@@ -167,6 +190,7 @@ let app = (() => {
             document.getElementById('generateButton').addEventListener('click', generateButtonClick);
 
             validator = new Validator();
+            dom = new DomManipulator();
         }
 
     }
