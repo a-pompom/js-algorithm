@@ -13,16 +13,15 @@ let app = (() => {
 
     // イベント
     function addButtonClick() {
-        clearErrorMessage();
+        clear();
         addItem();
     }
     function searchButtonClick() {
-        // styleをクリアする処理が必要
-        clearErrorMessage();
+        clear();
         searchItem();
     }
     function generateButtonClick() {
-        clearErrorMessage();
+        clear();
         generateItem();
     }
     // end イベント
@@ -101,6 +100,7 @@ let app = (() => {
         // リストDOM
         let itemListDOMId = 'itemList';
 
+        // 探索要素のulにliを追加し、個々の要素に識別要素としてidを設定
         let option = {
             textContent: itemList[itemList.length -1],
             element: 'li',
@@ -129,13 +129,13 @@ let app = (() => {
         itemList.forEach((element, index) => {
             // 該当要素が存在するか
             if (element === target) {
-                document.getElementById('item-' + index).setAttribute('class', 'targetItem');
+                dom.setClass('item-' + index, 'targetItem');
                 matched = true;
                 return;
             }
             // マッチするまでは線形探索を続ける
             if (!matched) {
-                document.getElementById('item-' + index).setAttribute('class', 'searchedItem');
+                dom.setClass('item-' + index, 'searchedItem');
             }
             
         });
@@ -149,13 +149,33 @@ let app = (() => {
      * @param {String} message 表示するエラーメッセージ
      */
     function setErrorMessage(message) {
-        document.getElementById('errorMessageText').textContent = message;
+        dom.setMessage('errorMessageText', message);
     }
     /**
      * エラーメッセージをクリア
      */
     function clearErrorMessage() {
-        document.getElementById('errorMessageText').textContent = "";
+        dom.clearMessage('errorMessageText');
+    }
+
+    /**
+     * 要素に割り当てられたスタイルを初期化
+     */
+    function clearStyleClass() {
+
+        itemList.forEach((element, index) => {
+            dom.removeStyleClass('item-' + index, 'targetItem');
+            dom.removeStyleClass('item-' + index, 'searchedItem');
+        });
+    }
+
+    /**
+     * 再探索ができるようボタンクリックで毎回探索結果をクリア
+     */
+    function clear() {
+        clearErrorMessage();
+        clearStyleClass();
+        matched = false;
     }
 
     
