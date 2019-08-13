@@ -24,6 +24,13 @@ let app = (() => {
         clear();
         generateItem();
     }
+    function deleteButtonClick() {
+        clear();
+        deleteElement();
+    }
+    function clearButtonClick() {
+        clear();
+    }
     // end イベント
 
 
@@ -178,6 +185,13 @@ let app = (() => {
         matched = false;
     }
 
+    function deleteElement() {
+        itemList.forEach((element, index) => {
+            document.getElementById('item-' + index).remove();
+        });
+        itemList = [];
+    }
+
     
     // 公開する処理を返却
     return {
@@ -188,6 +202,8 @@ let app = (() => {
             document.getElementById('addButton').addEventListener('click', addButtonClick);
             document.getElementById('searchButton').addEventListener('click', searchButtonClick);
             document.getElementById('generateButton').addEventListener('click', generateButtonClick);
+            document.getElementById('deleteButton').addEventListener('click', deleteButtonClick);
+            document.getElementById('clearButton').addEventListener('click', clearButtonClick);
 
             validator = new Validator();
             dom = new DomManipulator();
