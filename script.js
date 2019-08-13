@@ -1,11 +1,13 @@
 import Validator from './validator.js';
+import DomManipulator from './domManipulator.js';
 
 let app = (() => {
     
-
     let itemList = [];
 
     let validator;
+
+    let dom;
 
     let matched = false;
 
@@ -97,16 +99,17 @@ let app = (() => {
      */
     function appendItemDOM() {
         // リストDOM
-        let itemListDOM = document.getElementById('itemList');
+        let itemListDOMId = 'itemList';
 
-        // liに固有のidを付与したul要素へ追加
-        let newItemDOM = document.createElement('li');
-        newItemDOM.setAttribute('id', 'item-' + (itemList.length -1));
+        let option = {
+            textContent: itemList[itemList.length -1],
+            element: 'li',
+            attributeName: 'id',
+            attributeValue: 'item-' + (itemList.length -1),
+            appendTargetId: itemListDOMId
+        };
 
-        let newItem = itemList[itemList.length -1];
-        newItemDOM.textContent = newItem;
-
-        itemListDOM.appendChild(newItemDOM);
+        dom.appendNewElement(option);
     }
 
     /**
@@ -167,6 +170,7 @@ let app = (() => {
             document.getElementById('generateButton').addEventListener('click', generateButtonClick);
 
             validator = new Validator();
+            dom = new DomManipulator();
         }
 
     }
