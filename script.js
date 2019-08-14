@@ -199,16 +199,12 @@ let app = (() => {
          * 初期処理としてボタンクリックイベントを設定
          */
         init() {
+            // 各ボタンクリック時のイベント設定
             let eventList = ['add', 'search', 'generate', 'delete', 'clear'];
             let eventType = 'click';
             eventList.forEach((element) => {
-                document.getElementById(element + 'Button').addEventListener(eventType, element + 'ButtonClick');
+                document.getElementById(element + 'Button').addEventListener(eventType, window[element + 'ButtonClick']);
             });
-            document.getElementById('addButton').addEventListener('click', addButtonClick);
-            document.getElementById('searchButton').addEventListener('click', searchButtonClick);
-            document.getElementById('generateButton').addEventListener('click', generateButtonClick);
-            document.getElementById('deleteButton').addEventListener('click', deleteButtonClick);
-            document.getElementById('clearButton').addEventListener('click', clearButtonClick);
 
             validator = new Validator();
             dom = new DomManipulator();
