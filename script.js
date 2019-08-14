@@ -199,6 +199,11 @@ let app = (() => {
          * 初期処理としてボタンクリックイベントを設定
          */
         init() {
+            let eventList = ['add', 'search', 'generate', 'delete', 'clear'];
+            let eventType = 'click';
+            eventList.forEach((element) => {
+                document.getElementById(element + 'Button').addEventListener(eventType, element + 'ButtonClick');
+            });
             document.getElementById('addButton').addEventListener('click', addButtonClick);
             document.getElementById('searchButton').addEventListener('click', searchButtonClick);
             document.getElementById('generateButton').addEventListener('click', generateButtonClick);
