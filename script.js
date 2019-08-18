@@ -12,25 +12,34 @@ let app = (() => {
     let matched = false;
 
     // イベント
-    function addButtonClick() {
-        clear();
-        addItem();
-    }
-    function searchButtonClick() {
-        clear();
-        searchItem();
-    }
-    function generateButtonClick() {
-        clear();
-        generateItem();
-    }
-    function deleteButtonClick() {
-        clear();
-        deleteElement();
-    }
-    function clearButtonClick() {
-        clear();
-    }
+    // ループの中で動的に呼び出せるようコンテキストオブジェクトの中に格納
+    let buttonContext = {
+        // 追加
+        addButtonClick() {
+            clear();
+            addItem();
+        },
+        // 探索
+        searchButtonClick() {
+            clear();
+            searchItem();
+        },
+        // 生成
+        generateButtonClick() {
+            clear();
+            generateItem();
+        },
+        // 削除
+        deleteButtonClick() {
+            clear();
+            deleteElement();
+        },
+        // クリア
+        clearButtonClick() {
+            clear();
+        }
+    };
+    
     // end イベント
 
 
@@ -192,7 +201,6 @@ let app = (() => {
         itemList = [];
     }
 
-    
     // 公開する処理を返却
     return {
         /**
@@ -202,8 +210,13 @@ let app = (() => {
             // 各ボタンクリック時のイベント設定
             let eventList = ['add', 'search', 'generate', 'delete', 'clear'];
             let eventType = 'click';
+
             eventList.forEach((element) => {
-                document.getElementById(element + 'Button').addEventListener(eventType, window[element + 'ButtonClick']);
+                let funcName = element + 'ButtonClick';
+                
+                // 各イベントの関数はボタンコンテキストのオブジェクトのプロパティとして格納されているので、
+                // 文字列形式で呼び出すことができる
+                document.getElementById(element + 'Button').addEventListener(eventType, buttonContext[funcName]);
             });
 
             validator = new Validator();
