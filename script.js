@@ -12,18 +12,34 @@ let app = (() => {
     let matched = false;
 
     // イベント
-    function addButtonClick() {
-        clear();
-        addItem();
-    }
-    function searchButtonClick() {
-        clear();
-        searchItem();
-    }
-    function generateButtonClick() {
-        clear();
-        generateItem();
-    }
+    // ループの中で動的に呼び出せるようコンテキストオブジェクトの中に格納
+    let buttonContext = {
+        // 追加
+        addButtonClick() {
+            clear();
+            addItem();
+        },
+        // 探索
+        searchButtonClick() {
+            clear();
+            searchItem();
+        },
+        // 生成
+        generateButtonClick() {
+            clear();
+            generateItem();
+        },
+        // 削除
+        deleteButtonClick() {
+            clear();
+            deleteElement();
+        },
+        // クリア
+        clearButtonClick() {
+            clear();
+        }
+    };
+    
     // end イベント
 
 
@@ -178,16 +194,30 @@ let app = (() => {
         matched = false;
     }
 
-    
+    function deleteElement() {
+        itemList.forEach((element, index) => {
+            document.getElementById('item-' + index).remove();
+        });
+        itemList = [];
+    }
+
     // 公開する処理を返却
     return {
         /**
          * 初期処理としてボタンクリックイベントを設定
          */
         init() {
-            document.getElementById('addButton').addEventListener('click', addButtonClick);
-            document.getElementById('searchButton').addEventListener('click', searchButtonClick);
-            document.getElementById('generateButton').addEventListener('click', generateButtonClick);
+            // 各ボタンクリック時のイベント設定
+            let eventList = ['add', 'search', 'generate', 'delete', 'clear'];
+            let eventType = 'click';
+
+            eventList.forEach((element) => {
+                let funcName = element + 'ButtonClick';
+                
+                // 各イベントの関数はボタンコンテキストのオブジェクトのプロパティとして格納されているので、
+                // 文字列形式で呼び出すことができる
+                document.getElementById(element + 'Button').addEventListener(eventType, buttonContext[funcName]);
+            });
 
             validator = new Validator();
             dom = new DomManipulator();
