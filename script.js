@@ -2,14 +2,17 @@ import Validator from './validator.js';
 import DomManipulator from './domManipulator.js';
 
 let app = (() => {
-    
-    let itemList = [];
 
+    // 探索要素
+    let itemList = [];
+    // 探索要素が見つかったか
+    let matched = false;
+
+    // バリデーション処理用クラス
     let validator;
 
+    // DOM操作用のクラス
     let dom;
-
-    let matched = false;
 
     // イベント
     // ループの中で動的に呼び出せるようコンテキストオブジェクトの中に格納
@@ -44,6 +47,7 @@ let app = (() => {
 
 
     // メソッド
+
     /**
      * 入力値をリストへ追加
      * バリデーション処理が通ったもの(数値かつユニーク)を登録
@@ -100,6 +104,7 @@ let app = (() => {
         for (let i = 0; i < generateCount; i++) {
             let generatedValue = Math.floor(Math.random() * generateRange) + 1;
 
+            // 探索要素が重複すると探索・ソートアルゴリズムが正確に適用できなくなるので、ユニークになるよう調整
             while(itemList.includes(generatedValue)) {
                 generatedValue = Math.floor(Math.random() * generateRange) + 1;
             }
@@ -122,7 +127,8 @@ let app = (() => {
             element: 'li',
             attributeName: 'id',
             attributeValue: 'item-' + (itemList.length -1),
-            appendTargetId: itemListDOMId
+
+            appendTargetId: itemListDOMId // 挿入対象
         };
 
         dom.appendNewElement(option);
@@ -157,16 +163,15 @@ let app = (() => {
         });
     }
 
-    // バリデーション処理
-    
-    // エラーメッセージ処理
-    /**
-     * エラーメッセージを設定
-     * @param {String} message 表示するエラーメッセージ
+     /**
+     * 再探索ができるようボタンクリックで毎回探索結果をクリア
      */
-    function setErrorMessage(message) {
-        dom.setMessage('errorMessageText', message);
+    function clear() {
+        clearErrorMessage();
+        clearStyleClass();
+        matched = false;
     }
+
     /**
      * エラーメッセージをクリア
      */
@@ -186,21 +191,26 @@ let app = (() => {
     }
 
     /**
-     * 再探索ができるようボタンクリックで毎回探索結果をクリア
+     * 探索要素を全削除する
+     * 探索要素の配列・探索要素のDOMを初期化する
      */
-    function clear() {
-        clearErrorMessage();
-        clearStyleClass();
-        matched = false;
-    }
-
     function deleteElement() {
         itemList.forEach((element, index) => {
             document.getElementById('item-' + index).remove();
         });
         itemList = [];
     }
-
+    
+    // エラーメッセージ処理
+    /**
+     * エラーメッセージを設定
+     * @param {String} message 表示するエラーメッセージ
+     */
+    function setErrorMessage(message) {
+        dom.setMessage('errorMessageText', message);
+    }
+    
+    
     // 公開する処理を返却
     return {
         /**
