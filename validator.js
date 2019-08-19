@@ -1,3 +1,7 @@
+/**
+ * バリデーション処理を行う為のクラス
+ * 他でも再利用できるよう条件に合致するか否かのbool値のみを返す処理とする
+ */
 export default class Validator {
 
     constructor() {
