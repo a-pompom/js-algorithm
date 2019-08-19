@@ -1,5 +1,6 @@
 import Validator from './validator.js';
 import DomManipulator from './domManipulator.js';
+import LinearSearch from './linearSearch.js';
 
 let app = (() => {
 
@@ -135,7 +136,7 @@ let app = (() => {
     }
 
     /**
-     * リストを線形探索する
+     * リストを探索する
      */
     function searchItem() {
         // 探索要素
@@ -146,21 +147,10 @@ let app = (() => {
         }
         target = parseInt(target);
 
-        // リストを探索し、ヒットするまでは文字色をグレーにし、ヒットしたら該当文字色を赤にして
-        // 以降の処理は全てスキップ
-        itemList.forEach((element, index) => {
-            // 該当要素が存在するか
-            if (element === target) {
-                dom.setClass('item-' + index, 'targetItem');
-                matched = true;
-                return;
-            }
-            // マッチするまでは線形探索を続ける
-            if (!matched) {
-                dom.setClass('item-' + index, 'searchedItem');
-            }
-            
-        });
+        // 探索
+        const linearSearch = new LinearSearch(itemList, dom);
+
+        linearSearch.search(target);
     }
 
      /**
