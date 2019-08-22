@@ -6,43 +6,44 @@
     </head>
 
     <body>
-        <div>
-            <input type="text" id="itemAddInput">
-            <button type="button" id="addButton">追加</button>
-        </div>
+        <div class="container">
 
-        <div>
-            <input type="text" id="searchText">
-            <button type="button" id="searchButton">探索</button>
-        </div>
-
-        <div>
-            <button type="button" id="clearButton">クリア</button>
-        </div>
-        <div>
-            <button type="button" id="deleteButton">削除</button>
-        </div>
-
-        <hr>
-
-        <p>入力値自動生成</p>
-        <div>
-            <input type="text" placeholder="生成個数" id="generateCount">
-            <input type="text" placeholder="生成範囲" id="generateRange">
-            <button type="button" id="generateButton">生成</button>
-        </div>
-
-        <p id="errorMessageText"></p>
-        <div id="resultText">
-            <h3>Result:</h3>
+                <div>
+                    <input type="text" id="itemAddInput">
+                    <button type="button" id="addButton">追加</button>
+                </div>
+            
+                <div>
+                    <input type="text" id="searchText">
+                    <button type="button" id="searchButton">探索</button>
+                </div>
+            
+                <div>
+                    <button type="button" id="clearButton">クリア</button>
+                </div>
+                <div>
+                    <button type="button" id="deleteButton">削除</button>
+                </div>
+            
+                <hr>
+            
+                <p>入力値自動生成</p>
+                <div>
+                    <input type="text" placeholder="生成個数" id="generateCount">
+                    <input type="text" placeholder="生成範囲" id="generateRange">
+                    <button type="button" id="generateButton">生成</button>
+                </div>
+            
+                <p id="errorMessageText"></p>
+                <div id="resultText">
+                    <h3>Result:</h3>
+                </div>    
+            
+                <ul id="itemList" class="itemList" title="ItemList">
+        
+                </ul>
         </div>
         
-
-        <ul id="itemList">
-
-        </ul>
-
-
         <script type="module" src="./script.js"></script>
     </body>
 
