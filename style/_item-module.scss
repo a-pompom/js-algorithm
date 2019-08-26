@@ -1,0 +1,45 @@
+.search-area--input {
+
+    margin-top: 20px;
+
+	$color: ("textColor": #223254, "accentColor":#4893C6, "nonActiveColor": #C8CCD4);
+	$scale: ("perWidth": 60%, "height": 32px);
+	@include input-simple($color, $scale, 1.0rem);
+
+}
+
+.add-button {
+	@extend %button--simple;
+	width: 48px;
+	height: 24px;
+	background-color: #F4F3F6; 
+	color: #4893C6;
+
+	&:hover {
+		background-color: #4893C6;
+	}
+}
+
+.clear-button {
+    @extend %button--simple;
+	width: 48px;
+	height: 24px;
+	background-color: #F4F3F6; 
+	color: #84B9E5;
+
+	&:hover {
+		background-color: #84B9E5;
+	}
+}
+
+.search-button, .delete-button {
+	@extend %button--simple;
+	width: 48px;
+	height: 24px;
+	background-color: #F4F3F6; 
+	color: #C14F7E;
+
+	&:hover {
+		background-color: #C14F7E;
+	}
+}

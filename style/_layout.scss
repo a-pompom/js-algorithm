@@ -4,3 +4,16 @@
     text-align: center;
     margin: 20px auto;
 }
+
+.search-area {
+    width: 55%;
+    margin: 10px auto;
+
+    &__sub-button {
+        @include flex-left;
+
+        & li {
+            margin-left: 15px;
+        }
+    }
+}

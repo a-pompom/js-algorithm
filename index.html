@@ -8,21 +8,36 @@
     <body>
         <div class="container">
 
-                <div>
-                    <input type="text" id="itemAddInput">
-                    <button type="button" id="addButton">追加</button>
-                </div>
+            <div class="search-area">
+                    <label for="search-item" class="search-area--input">
+                        <input type="text" placeholder="&nbsp;" id="itemAddInput">
+                        <span class="search-area--input__placeholder">リストに追加する要素</span>
+                        <span class="search-area--input__border"></span>
+                    </label>
+                        
+                    <button type="button" id="addButton" class="add-button">追加</button>
+
+                    <label for="search-item" class="search-area--input">
+                        <input type="text" placeholder="&nbsp;" id="searchText">
+                        <span class="search-area--input__placeholder">探索要素</span>
+                        <span class="search-area--input__border"></span>
+                    </label>
+                        
+                    <button type="button" id="searchButton" class="search-button">探索</button>
+
+                    <ul class="search-area__sub-button">
+                        <li><button type="button" id="clearButton" class="clear-button">クリア</button></li>
+                        <li><button type="button" id="deleteButton" class="delete-button">削除</button></li>
+                    </ul>
+            </div>
+
+                
             
                 <div>
-                    <input type="text" id="searchText">
-                    <button type="button" id="searchButton">探索</button>
-                </div>
-            
-                <div>
-                    <button type="button" id="clearButton">クリア</button>
+                    
                 </div>
                 <div>
-                    <button type="button" id="deleteButton">削除</button>
+                    
                 </div>
             
                 <hr>
