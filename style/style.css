@@ -64,16 +64,16 @@ button, input[type="submit"], input[type="reset"] {
 )
 @parameter $fontSize {number} 文字の大きさ
 */
-.add-button, .clear-button, .search-button, .delete-button {
+.add-button, .clear-button, .search-button, .delete-button, .button--generate {
   position: relative;
   display: inline-block;
   font-weight: bold;
   text-decoration: none;
   cursor: pointer; }
 
-.add-button, .clear-button, .search-button, .delete-button {
+.add-button, .clear-button, .search-button, .delete-button, .button--generate {
   transition: .4s; }
-  .add-button:hover, .clear-button:hover, .search-button:hover, .delete-button:hover {
+  .add-button:hover, .clear-button:hover, .search-button:hover, .delete-button:hover, .button--generate:hover {
     color: #fff; }
 
 .container {
@@ -189,5 +189,34 @@ button, input[type="submit"], input[type="reset"] {
   color: #C14F7E; }
   .search-button:hover, .delete-button:hover {
     background-color: #C14F7E; }
+
+.button--generate {
+  width: 48px;
+  height: 24px;
+  background-color: #F4F3F6;
+  color: #84B9E5; }
+  .button--generate:hover {
+    background-color: #84B9E5; }
+
+.auto-generator {
+  display: block;
+  -webkit-appearance: none;
+  background-color: #F4F3F6;
+  width: 300px;
+  height: 5px;
+  border-radius: 5px;
+  outline: 0;
+  margin: 10px auto; }
+  .auto-generator::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background-color: #C14F7E;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid white;
+    cursor: pointer;
+    transition: .3s ease-in-out; }
+    .auto-generator::-webkit-slider-thumb:active {
+      transform: scale(1.6); }
 
 /*# sourceMappingURL=style.css.map */

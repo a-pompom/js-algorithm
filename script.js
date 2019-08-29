@@ -83,36 +83,27 @@ let app = (() => {
      */
     function generateItem() {
         // 生成個数
-        let generateCount = document.getElementById('generateCount').value
-        // 生成範囲
-        let generateRange = document.getElementById('generateRange').value;
-
-        // 数値か
-        if (!validator.validateNumericInput(generateCount) || !validator.validateNumericInput(generateRange)) {
-            setErrorMessage('数値を入力してください');
-            return;
-        }
-        generateCount = parseInt(generateCount);
-        generateRange = parseInt(generateRange);
-
-        // 生成個数が生成範囲より十分に小さいか
-        if (!validator.validateGenerateCountLtRange()) {
-            setErrorMessage('生成個数が多すぎます');
-            return;
-        }
-
-        // ランダムに探索要素を生成
-        for (let i = 0; i < generateCount; i++) {
-            let generatedValue = Math.floor(Math.random() * generateRange) + 1;
-
-            // 探索要素が重複すると探索・ソートアルゴリズムが正確に適用できなくなるので、ユニークになるよう調整
-            while(itemList.includes(generatedValue)) {
-                generatedValue = Math.floor(Math.random() * generateRange) + 1;
-            }
-            itemList.push(generatedValue);
-            appendItemDOM();
-        }
+        let generateCount = parseInt(document.getElementById('autoGenerateValue').textContent);
         
+		clear();
+        deleteElement();
+		
+		let seedItemList = [];
+		for (let i = 1; i < generateCount + 1; i++) {
+			seedItemList.push(i);
+		}
+		
+		// シャッフル
+		for (let x = seedItemList.length - 1; x > 0; x--) {
+        const j = Math.floor(Math.random() * (x + 1));
+        [seedItemList[x], seedItemList[j]] = [seedItemList[j], seedItemList[x]];
+    	}
+		
+		seedItemList.forEach((element) => {
+			itemList.push(element);
+			appendItemDOM();
+		});
+   
     }
 
     /**
@@ -221,6 +212,16 @@ let app = (() => {
 
             validator = new Validator();
             dom = new DomManipulator();
+			
+			console.log(document.getElementById('autoGenerator'));
+			document.getElementById('autoGenerator').addEventListener('mouseup', (() => {
+				console.log('changed');
+				let power = document.getElementById('autoGenerator').value; 
+				
+				document.getElementById('autoGenerateValue').textContent = Math.pow(10, power);
+				console.log(document.getElementById('autoGenerateValue').textContent);
+			}))
+			
         }
 
     }

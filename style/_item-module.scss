@@ -43,3 +43,42 @@
 		background-color: #C14F7E;
 	}
 }
+
+.button--generate {
+	@extend %button--simple;
+	width: 48px;
+	height: 24px;
+	
+	background-color: #F4F3F6; 
+	color: #84B9E5;
+
+	&:hover {
+		background-color: #84B9E5;
+	}
+}
+
+.auto-generator {
+	display: block;
+	-webkit-appearance: none;
+	background-color: #F4F3F6;
+	width: 300px;
+	height: 5px;
+	border-radius: 5px;
+	outline: 0;
+	margin: 10px auto;
+	
+	&::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		background-color: #C14F7E;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		border: 2px solid white;
+		cursor: pointer;
+		transition: .3s ease-in-out;
+		
+		&:active {
+			transform: scale(1.6);
+		}
+	}
+}

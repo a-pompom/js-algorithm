@@ -30,23 +30,16 @@
                         <li><button type="button" id="deleteButton" class="delete-button">削除</button></li>
                     </ul>
             </div>
-
-                
-            
-                <div>
-                    
-                </div>
-                <div>
-                    
-                </div>
             
                 <hr>
+                <h3 id="autoGenerateValue">1</h3>
+                <label for="autoGenerateValue">
+                	<input type="range" id="autoGenerator" max="4" min="1" step="1" value="10" class="auto-generator">
+                </label>
             
                 <p>入力値自動生成</p>
                 <div>
-                    <input type="text" placeholder="生成個数" id="generateCount">
-                    <input type="text" placeholder="生成範囲" id="generateRange">
-                    <button type="button" id="generateButton">生成</button>
+                    <button type="button" id="generateButton" class="button--generate">生成</button>
                 </div>
             
                 <p id="errorMessageText"></p>
