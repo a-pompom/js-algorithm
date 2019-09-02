@@ -1,6 +1,7 @@
 import Validator from './validator.js';
 import DomManipulator from './domManipulator.js';
 import LinearSearch from './linearSearch.js';
+import SelectionSort from './selectionSort.js';
 
 let app = (() => {
 
@@ -14,6 +15,8 @@ let app = (() => {
 
     // DOM操作用のクラス
     let dom;
+	
+	let sort;
 
     // イベント
     // ループの中で動的に呼び出せるようコンテキストオブジェクトの中に格納
@@ -33,6 +36,11 @@ let app = (() => {
             clear();
             generateItem();
         },
+		// ソート
+		sortButtonClick() {
+			clear();
+			sortItem();	
+		},
         // 削除
         deleteButtonClick() {
             clear();
@@ -105,6 +113,21 @@ let app = (() => {
 		});
    
     }
+	
+	function sortItem() {
+		// TODO 再帰は重たくなるのでループで書き換える
+		sort.init();
+		let sortedItemList = sort.selectionSort(itemList);
+		
+		deleteElement();
+		
+		
+		sortedItemList.forEach((element) => {
+			itemList.push(element);
+			appendItemDOM();
+		});
+		
+	}
 
     /**
      * リストのHTMLを追加された配列要素で更新
@@ -199,7 +222,7 @@ let app = (() => {
          */
         init() {
             // 各ボタンクリック時のイベント設定
-            let eventList = ['add', 'search', 'generate', 'delete', 'clear'];
+            let eventList = ['add', 'search', 'generate', 'sort', 'delete', 'clear'];
             let eventType = 'click';
 
             eventList.forEach((element) => {
@@ -212,15 +235,16 @@ let app = (() => {
 
             validator = new Validator();
             dom = new DomManipulator();
+			sort = new SelectionSort();
 			
-			console.log(document.getElementById('autoGenerator'));
 			document.getElementById('autoGenerator').addEventListener('mouseup', (() => {
-				console.log('changed');
 				let power = document.getElementById('autoGenerator').value; 
 				
 				document.getElementById('autoGenerateValue').textContent = Math.pow(10, power);
-				console.log(document.getElementById('autoGenerateValue').textContent);
-			}))
+				
+			}));
+			
+			
 			
         }
 

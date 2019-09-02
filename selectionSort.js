@@ -16,40 +16,48 @@
 */
 export default class SelectionSort {
 	
-	constructor(sortList) {
-		this.sortList = sortList;
+	constructor() {
+		this.sortList = [];
 		this.pointer = 0; // 選択ソートのポインタとして利用
+	}
+	
+	init() {
+		this.pointer = 0;
 	}
 	
 	/**
 	 * 選択ソートを実際に行う
 	 * @returns {Array} ソート済みの探索配列
 	 */
-	selectionSort() {
-		// 他の要素と重複しないよう範囲外の値を初期値として設定
-		let min = 99999;
-		let minIndex = -1;
+	selectionSort(sortList) {
 		
-		// 最小値の更新
-		this.sortList.forEach((element, index) => {
-			
-			if (min < element) {
-				min = element;
-				minIndex = index;
+		if (sortList.length === 0) {
+			return [];
+		}
+		
+		this.sortList = sortList;
+		
+		for (let i = 0; i < this.sortList.length; i++) {
+			// 他の要素と重複しないよう範囲外の値を初期値として設定
+			let min = 99999;
+			let minIndex = -1;
+
+			// 最小値の更新
+			for (let j = this.pointer; j < this.sortList.length; j++) {
+				if (min > this.sortList[j]) {
+					min = this.sortList[j];
+					minIndex = j;
+				}
 			}
-		});
+
+			// 入れ替え
+			[this.sortList[this.pointer], this.sortList[minIndex]] = [this.sortList[minIndex], this.sortList[this.pointer]];
+			
+			this.pointer ++;
+
+		}
 		
-		// 入れ替え
-		[this.sortList[pointer], this.sortList[minIndex]] = [this.sortList[minIndex], this.sortList[pointer]];
-		
-		// 後処理
-		if (pointer === this.sortList.length -1) {
-			return this.sortList;
-		} 
-		
-		// 再帰呼び出し pointerが探索要素の配列の終端に到達、すなわちソートが完了するまで行う
-		this.pointer ++;
-		this.selectionSort();
+		return this.sortList;
 		
 	}
 	
