@@ -1,63 +1,63 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP&display=swap&subset=japanese" rel="stylesheet">
-        <link rel="stylesheet" href="./style/style.css">
-    </head>
+	<head>
+		<link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP&display=swap&subset=japanese" rel="stylesheet">
+		<link rel="stylesheet" href="./style/style.css">
+	</head>
 
-    <body>
-        <div class="container">
+	<body>
+		<div class="container">
 
-            <div class="search-area">
-                    <label for="search-item" class="search-area--input">
-                        <input type="text" placeholder="&nbsp;" id="itemAddInput">
-                        <span class="search-area--input__placeholder">リストに追加する要素</span>
-                        <span class="search-area--input__border"></span>
-                    </label>
-                        
-                    <button type="button" id="addButton" class="add-button">追加</button>
+			<div class="search-area">
+					<label for="search-item" class="search-area--input">
+						<input type="text" placeholder="&nbsp;" id="itemAddInput">
+						<span class="search-area--input__placeholder">リストに追加する要素</span>
+						<span class="search-area--input__border"></span>
+					</label>
+						
+					<button type="button" id="addButton" class="add-button">追加</button>
 
-                    <label for="search-item" class="search-area--input">
-                        <input type="text" placeholder="&nbsp;" id="searchText">
-                        <span class="search-area--input__placeholder">探索要素</span>
-                        <span class="search-area--input__border"></span>
-                    </label>
-                        
-                    <button type="button" id="searchButton" class="search-button">探索</button>
+					<label for="search-item" class="search-area--input">
+						<input type="text" placeholder="&nbsp;" id="searchText">
+						<span class="search-area--input__placeholder">探索要素</span>
+						<span class="search-area--input__border"></span>
+					</label>
+						
+					<button type="button" id="searchButton" class="search-button">探索</button>
 
-                    <ul class="search-area__sub-button">
-                        <li><button type="button" id="clearButton" class="clear-button">クリア</button></li>
-                        <li><button type="button" id="deleteButton" class="delete-button">削除</button></li>
-                    </ul>
-            </div>
-            
-                <hr>
-                <h3 id="autoGenerateValue">1</h3>
-                <label for="autoGenerateValue">
-                	<input type="range" id="autoGenerator" max="4" min="1" step="1" value="10" class="auto-generator">
-                </label>
-            
-                <p>入力値自動生成</p>
-                <div>
-                    <button type="button" id="generateButton" class="button--generate">生成</button>
-                </div>
-                
-                <div>
-                    <button type="button" id="sortButton" class="button--generate">ソート</button>
-                </div>
-                
-            
-                <p id="errorMessageText"></p>
-                <div id="resultText">
-                    <h3>Result:</h3>
-                </div>    
-            
-                <ul id="itemList" class="itemList" title="ItemList">
-        
-                </ul>
-        </div>
-        
-        <script type="module" src="./script.js"></script>
-    </body>
+					<ul class="search-area__sub-button">
+						<li><button type="button" id="clearButton" class="clear-button">クリア</button></li>
+						<li><button type="button" id="deleteButton" class="delete-button">削除</button></li>
+					</ul>
+			</div>
+			
+				<hr>
+				<h3 id="autoGenerateValue">1</h3>
+				<label for="autoGenerateValue">
+					<input type="range" id="autoGenerator" max="4" min="1" step="1" value="10" class="auto-generator">
+				</label>
+			
+				<p>入力値自動生成</p>
+				<div>
+					<button type="button" id="generateButton" class="button--generate">生成</button>
+				</div>
+				
+				<div>
+					<button type="button" id="sortButton" class="button--generate">ソート</button>
+				</div>
+				
+			
+				<p id="errorMessageText"></p>
+				<div id="resultText">
+					<h3>Result:</h3>
+				</div>	
+			
+				<ul id="itemList" class="itemList" title="ItemList">
+		
+				</ul>
+		</div>
+		
+		<script type="module" src="./js/script.js"></script>
+	</body>
 
 </html>

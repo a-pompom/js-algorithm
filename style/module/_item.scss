@@ -1,0 +1,53 @@
+.itemList {
+
+	width: 40%;
+	
+	position: relative;
+	
+	margin: 20px auto;
+	border: solid 2px #240079;
+	
+	&::after {
+		content:attr(title);
+		
+		position: absolute;
+		bottom: 100%;
+		left: -2px;
+		
+		font-weight: bold;
+		font-size: 1.3rem;
+		letter-spacing: 0.05rem;
+		
+		padding: 2px 5px;
+		border-radius: 4px 4px 0 0;
+
+		color: #fff;
+		background-color: #240079;
+
+	}
+	
+
+	& li {
+		width: 90%;
+		height: 40px;
+		
+		line-height: 40px;
+		
+		padding: 3px;
+		border-bottom: 1px dashed rgb(77, 114, 182);
+
+		&:last-child {
+			border: none;
+		}
+
+	}
+}
+
+
+.searchedItem {
+	color: #e3e3e3;
+}
+
+.targetItem {
+	color: red;
+}
