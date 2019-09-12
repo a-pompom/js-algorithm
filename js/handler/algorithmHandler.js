@@ -61,6 +61,7 @@ export default class AlgorithmHandler extends EventHandler{
 		let target = document.getElementById('searchText').value;
 		// バリデーション
 		if (!Validator.validateNumericInput(target)) {
+			this.defaultEvent.setErrorMessage('数値を入力してください。')
 			return;
 		}
 		this.listContainer.target = parseInt(target);

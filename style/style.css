@@ -58,9 +58,17 @@ button, input[type="submit"], input[type="reset"] {
   margin: 10px auto; }
   .search-area__sub-button {
     display: flex;
-    justify-content: flex-start; }
-    .search-area__sub-button li {
-      margin-left: 15px; }
+    justify-content: space-between; }
+    .search-area__sub-button--default {
+      display: flex;
+      justify-content: flex-start; }
+      .search-area__sub-button--default li {
+        margin-left: 20px; }
+    .search-area__sub-button--algorithm {
+      display: flex;
+      justify-content: flex-end; }
+      .search-area__sub-button--algorithm li {
+        margin-right: 20px; }
 
 /*
 下線のみを持つシンプルなテキスト入力

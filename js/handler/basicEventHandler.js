@@ -35,6 +35,14 @@ export default class BasicEventHandler extends EventHandler{
 		
 		this.listContainer.matched = false;
 	}
+	
+	/**
+	 * エラーメッセージを設定
+	 * @param {String} message エラーメッセージ
+	 */
+	setErrorMessage(message) {
+		Dom.setMessage('errorMessageText', message);
+	}
 
 	/**
 	 * エラーメッセージをクリア

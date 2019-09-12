@@ -13,10 +13,25 @@
 	margin: 10px auto;
 
 	&__sub-button {
-		@include flex-left;
+		@include flex-between;
 
-		& li {
-			margin-left: 15px;
+		&--default {
+			@include flex-left;
+			
+			& li {
+				margin-left: 20px;
+			}
+			
 		}
+		
+		&--algorithm {
+			@include flex-right;
+			
+			& li {
+				margin-right: 20px;
+			}
+			
+		}
+		
 	}
 }

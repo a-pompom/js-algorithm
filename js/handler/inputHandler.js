@@ -50,19 +50,19 @@ export default class InputHandler extends EventHandler {
 		
 		//バリデーション
 		if (!Validator.validateNumericInput(addValue)) {
-			this.setErrorMessage('数値を入力してください');
+			this.defaultEvent.setErrorMessage('数値を入力してください');
 			return;
 		}
 		addValue = parseInt(addValue);
 
 		if (!Validator
 			.validateDupulicateInput(addValue, this.listContainer.itemList)) {
-				this.setErrorMessage('その値は既に登録されています');
+				this.defaultEvent.setErrorMessage('その値は既に登録されています');
 				return;
 		}
 
 		this.listContainer.itemList.push(parseInt(addValue));
-		this.appendItem();
+		Dom.appendItem(this.listContainer.itemList);
 
 		//連続で入力することを想定しているので、毎回入力部はクリア
 		document.getElementById('itemAddInput').value = "";
@@ -92,14 +92,11 @@ export default class InputHandler extends EventHandler {
 			this.listContainer.itemList.push(element);
 			Dom.appendItem(this.listContainer.itemList);
 		});
-		
-		console.log(this.listContainer);
    
 	}
 	
 	autoGenerate() {
 		let power = document.getElementById('autoGenerator').value; 
-				
 		document.getElementById('autoGenerateValue').textContent = Math.pow(10, power);
 	}
 	
