@@ -1,33 +1,30 @@
 /**
  * DOM操作を簡易化するためのクラス
+ * 状態は保持しないので、staticクラスとして扱う
  * 以下の機能を持つ
  * ・メッセージ・スタイルの操作
  * ・HTML要素の生成
  */
 export default class DomManipulator {
-
-	constructor() {
-		
-	}
 	
 	// 対象のDOM要素にテキストとしてメッセージを設定
-	setMessage(targetElement, message) {
+	static setMessage(targetElement, message) {
 		document.getElementById(targetElement).textContent = message;
 	}
 	// 対象のDOM要素に設定されたテキストを消去
-	clearMessage(targetElement) {
+	static clearMessage(targetElement) {
 		document.getElementById(targetElement).textContent = "";
 	}
 	// 対象のDOM要素に付与されたクラスを消去
-	removeStyleClass(targetElement, targetClass) {
+	static removeStyleClass(targetElement, targetClass) {
 		document.getElementById(targetElement).classList.remove(targetClass);
 	}
 	// 対象のDOM要素のクラスを上書きする
-	setClass(targetElement, targetClass) {
+	static setClass(targetElement, targetClass) {
 		document.getElementById(targetElement).setAttribute('class', targetClass);
 	}
 	// 対象のDOM要素へクラスを追加する
-	addClass(targetElement, targetClass) {
+	static addClass(targetElement, targetClass) {
 		document.getElementById(targetElement).classList.add(targetClass);
 	}
 
@@ -42,7 +39,7 @@ export default class DomManipulator {
 	 *  appendTargetId: 追加した要素を格納するDOM要素
 	 * } 
 	 */
-	appendNewElement(option) {
+	static appendNewElement(option) {
 		// 生成要素
 		let newItemDOM = document.createElement(option.element);
 		
@@ -56,5 +53,28 @@ export default class DomManipulator {
 		document.getElementById(option.appendTargetId).appendChild(newItemDOM);
 
 	}
+	
+	/**
+	 * リストのHTMLを追加された配列要素で更新
+	 */
+	static appendItem(itemList) {
+		// リストDOM
+		let itemListDOMId = 'itemList';
+		let tailIndex = itemList.length -1;
+		
+		// 探索要素のulにliを追加し、個々の要素に識別要素としてidを設定
+		let option = {
+			textContent: itemList[tailIndex],
+			element: 'li',
+			attributeName: 'id',
+			attributeValue: 'item-' + (tailIndex),
+
+			appendTargetId: itemListDOMId // 挿入対象
+		};
+		
+		this.appendNewElement(option);
+	}
+	
+	
 	
 }

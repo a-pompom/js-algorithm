@@ -10,39 +10,33 @@
 *
 * ・ループを終了したら、pointer番目の要素と最小値の要素を入れ替え
 *
-* ・pointerが探索要素の終端に到達するまで再帰的に上記動作を実行
+* ・pointerが探索要素の終端に到達するまで上記動作を実行
 *
 * ・探索が終了すると、昇順にソートされた探索要素配列が出来上がる
 */
 export default class SelectionSort {
 	
-	constructor() {
-		this.sortList = [];
+	constructor(listContainer) {
+		this.sortList = listContainer.itemList;
 		this.pointer = 0; // 選択ソートのポインタとして利用
-	}
-	
-	init() {
-		this.pointer = 0;
 	}
 	
 	/**
 	 * 選択ソートを実際に行う
 	 * @returns {Array} ソート済みの探索配列
 	 */
-	selectionSort(sortList) {
-		
-		if (sortList.length === 0) {
+	sort() {
+		this.pointer = 0;
+		if (this.sortList.length === 0) {
 			return [];
 		}
-		
-		this.sortList = sortList;
-		
+
 		for (let i = 0; i < this.sortList.length; i++) {
 			// 他の要素と重複しないよう範囲外の値を初期値として設定
 			let min = 99999;
 			let minIndex = -1;
 
-			// 最小値の更新
+			// 最小値・最小インデックスの更新
 			for (let j = this.pointer; j < this.sortList.length; j++) {
 				if (min > this.sortList[j]) {
 					min = this.sortList[j];

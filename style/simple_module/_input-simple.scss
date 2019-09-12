@@ -17,23 +17,26 @@
 	
 	$inputHeight: map-get($scale, "height");
 	
-	display: inline-block;
-	position: relative;
-	
 	width: map-get($scale, "perWidth");
 	height: $inputHeight;
 	
+	display: inline-block;
+	position: relative;
+	
 	// 入力欄
 	& input, textarea {
-		display: inline-block;
 		width: 100%;
 		height: $inputHeight;
+		
+		display: inline-block;
+		
 		font-size: $fontSize;
 		
-		color: map-get($color, "textColor");
 		padding: 12px 0;
-		
 		border-bottom: 2px solid map-get($color, "nonActiveColor"); // 非フォーカス時
+		
+		color: map-get($color, "textColor");
+
 		transition: all .15s ease;
 		
 		&:hover {
@@ -59,7 +62,6 @@
 				}
 			}
 		}
-		
 	}
 	
 	// フォーカスされるまでは通常のプレースホルダと同様入力欄端にグレーで配置
@@ -77,12 +79,13 @@
 	// input自体のボーダーと重ね合わせ、フォーカス時には横方向から描画/消去されることで
 	// アクティブ・非アクティブを可視化
 	&__border {
+		width: 100%;
+		height: 2px;
+		
 		position: absolute;
 		bottom: 0;
 		left: 0;
 
-		height: 2px;
-		width: 100%;
 		background-color: map-get($color, "accentColor");
 
 		transform: scaleX(0);

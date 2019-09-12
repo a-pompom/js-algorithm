@@ -23,3 +23,10 @@
 	display: flex;
 	flex-wrap: wrap;
 }
+
+// レスポンシブ用
+@mixin responsive($breakpoint: pc) {
+	@media #{map-get($breakpoints, $breakpoint)} {
+		@content;
+	}
+}

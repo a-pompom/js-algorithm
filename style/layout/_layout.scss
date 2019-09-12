@@ -1,0 +1,37 @@
+.container {
+	width: 100%;
+	height: 100%;
+	
+	text-align: center;
+	
+	margin: 20px auto;
+}
+
+.search-area {
+	width: 55%;
+	
+	margin: 10px auto;
+
+	&__sub-button {
+		@include flex-between;
+
+		&--default {
+			@include flex-left;
+			
+			& li {
+				margin-left: 20px;
+			}
+			
+		}
+		
+		&--algorithm {
+			@include flex-right;
+			
+			& li {
+				margin-right: 20px;
+			}
+			
+		}
+		
+	}
+}

@@ -3,11 +3,9 @@ html,
 body {
   width: 100%;
   height: 100%;
-  margin: 10px auto;
   font-size: 90%;
   font-family: 'Noto Sans JP', sans-serif;
-  color: #4d464f;
-  border-radius: 10px; }
+  color: #4d464f; }
 
 ul {
   list-style: none; }
@@ -49,6 +47,29 @@ button, input[type="submit"], input[type="reset"] {
   cursor: pointer;
   outline: inherit; }
 
+.container {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  margin: 20px auto; }
+
+.search-area {
+  width: 55%;
+  margin: 10px auto; }
+  .search-area__sub-button {
+    display: flex;
+    justify-content: space-between; }
+    .search-area__sub-button--default {
+      display: flex;
+      justify-content: flex-start; }
+      .search-area__sub-button--default li {
+        margin-left: 20px; }
+    .search-area__sub-button--algorithm {
+      display: flex;
+      justify-content: flex-end; }
+      .search-area__sub-button--algorithm li {
+        margin-right: 20px; }
+
 /*
 下線のみを持つシンプルなテキスト入力
 フォーカスでプレースホルダが移動し、アクティブになったことを表すために
@@ -76,43 +97,28 @@ button, input[type="submit"], input[type="reset"] {
   .add-button:hover, .clear-button:hover, .search-button:hover, .delete-button:hover, .button--generate:hover {
     color: #fff; }
 
-.container {
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  margin: 20px auto; }
-
-.search-area {
-  width: 55%;
-  margin: 10px auto; }
-  .search-area__sub-button {
-    display: flex;
-    justify-content: flex-start; }
-    .search-area__sub-button li {
-      margin-left: 15px; }
-
 .itemList {
-  position: relative;
-  border: solid 2px #240079;
   width: 40%;
-  margin: 20px auto; }
+  position: relative;
+  margin: 20px auto;
+  border: solid 2px #240079; }
   .itemList::after {
-    position: absolute;
     content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: -2px;
     font-weight: bold;
     font-size: 1.3rem;
-    border-radius: 4px 4px 0 0;
     letter-spacing: 0.05rem;
     padding: 2px 5px;
+    border-radius: 4px 4px 0 0;
     color: #fff;
-    background-color: #240079;
-    bottom: 100%;
-    left: -2px; }
+    background-color: #240079; }
   .itemList li {
     width: 90%;
     height: 40px;
-    padding: 3px;
     line-height: 40px;
+    padding: 3px;
     border-bottom: 1px dashed #4d72b6; }
     .itemList li:last-child {
       border: none; }
@@ -125,18 +131,18 @@ button, input[type="submit"], input[type="reset"] {
 
 .search-area--input {
   margin-top: 20px;
-  display: inline-block;
-  position: relative;
   width: 60%;
-  height: 32px; }
+  height: 32px;
+  display: inline-block;
+  position: relative; }
   .search-area--input input, .search-area--input textarea {
-    display: inline-block;
     width: 100%;
     height: 32px;
+    display: inline-block;
     font-size: 1rem;
-    color: #223254;
     padding: 12px 0;
     border-bottom: 2px solid #C8CCD4;
+    color: #223254;
     transition: all .15s ease; }
     .search-area--input input:hover, .search-area--input textarea:hover {
       background-color: rgba(34, 50, 84, 0.03); }
@@ -156,11 +162,11 @@ button, input[type="submit"], input[type="reset"] {
     transform-origin: 0 0;
     transition: all 0.2s ease; }
   .search-area--input__border {
+    width: 100%;
+    height: 2px;
     position: absolute;
     bottom: 0;
     left: 0;
-    height: 2px;
-    width: 100%;
     background-color: #4893C6;
     transform: scaleX(0);
     transform-origin: 0 0;
@@ -199,21 +205,21 @@ button, input[type="submit"], input[type="reset"] {
     background-color: #84B9E5; }
 
 .auto-generator {
-  display: block;
   -webkit-appearance: none;
-  background-color: #F4F3F6;
   width: 300px;
   height: 5px;
+  display: block;
+  margin: 10px auto;
   border-radius: 5px;
-  outline: 0;
-  margin: 10px auto; }
+  background-color: #F4F3F6;
+  outline: 0; }
   .auto-generator::-webkit-slider-thumb {
     -webkit-appearance: none;
-    background-color: #C14F7E;
     width: 30px;
     height: 30px;
-    border-radius: 50%;
     border: 2px solid white;
+    border-radius: 50%;
+    background-color: #C14F7E;
     cursor: pointer;
     transition: .3s ease-in-out; }
     .auto-generator::-webkit-slider-thumb:active {
