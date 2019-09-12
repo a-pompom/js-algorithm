@@ -19,8 +19,7 @@ export default class InputHandler extends EventHandler {
 		let generateFuncList = [this.autoGenerateFocus];
 		
 		super.registerEvent(['autoGenerator'], 'mouseup', generateFuncList);
-		
-		
+			
 	}
 	
 	addButtonClick() {
@@ -37,7 +36,7 @@ export default class InputHandler extends EventHandler {
 	}
 	
 	autoGenerateFocus() {
-		this.autoGenerate();
+		this.calcAutoGenerateCount();
 	}
 	
 	/**
@@ -95,7 +94,10 @@ export default class InputHandler extends EventHandler {
    
 	}
 	
-	autoGenerate() {
+	/**
+	 * 自動生成する要素の数を導出する
+	 */
+	calcAutoGenerateCount() {
 		let power = document.getElementById('autoGenerator').value; 
 		document.getElementById('autoGenerateValue').textContent = Math.pow(10, power);
 	}

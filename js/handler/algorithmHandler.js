@@ -82,7 +82,7 @@ export default class AlgorithmHandler extends EventHandler{
 		// ソート後には並べ替えのため再描画が必要となるので、既存要素は削除
 		this.defaultEvent.deleteElement();
 		
-		// 再描画
+		// ソート結果で再描画
 		sortedItemList.forEach((element) => {
 			this.listContainer.itemList.push(element);
 			Dom.appendItem(this.listContainer.itemList);
