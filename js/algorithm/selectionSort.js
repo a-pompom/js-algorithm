@@ -17,8 +17,7 @@
 export default class SelectionSort {
 	
 	constructor(listContainer) {
-		this.sortList = listContainer.itemList;
-		this.pointer = 0; // 選択ソートのポインタとして利用
+		this.listContainer = listContainer;
 	}
 	
 	/**
@@ -26,32 +25,33 @@ export default class SelectionSort {
 	 * @returns {Array} ソート済みの探索配列
 	 */
 	sort() {
-		this.pointer = 0;
-		if (this.sortList.length === 0) {
+		let sortList = this.listContainer.itemList;
+		let pointer = 0;
+		if (sortList.length === 0) {
 			return [];
 		}
 
-		for (let i = 0; i < this.sortList.length; i++) {
+		for (let i = 0; i < sortList.length; i++) {
 			// 他の要素と重複しないよう範囲外の値を初期値として設定
 			let min = 99999;
 			let minIndex = -1;
 
 			// 最小値・最小インデックスの更新
-			for (let j = this.pointer; j < this.sortList.length; j++) {
-				if (min > this.sortList[j]) {
-					min = this.sortList[j];
+			for (let j = pointer; j < sortList.length; j++) {
+				if (min > sortList[j]) {
+					min = sortList[j];
 					minIndex = j;
 				}
 			}
 
 			// 入れ替え
-			[this.sortList[this.pointer], this.sortList[minIndex]] = [this.sortList[minIndex], this.sortList[this.pointer]];
+			[sortList[pointer], sortList[minIndex]] = [sortList[minIndex], sortList[pointer]];
 			
-			this.pointer ++;
+			pointer ++;
 
 		}
 		
-		return this.sortList;
+		return sortList;
 		
 	}
 	
