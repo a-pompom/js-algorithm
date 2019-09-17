@@ -17,7 +17,11 @@
 export default class SelectionSort {
 	
 	constructor(listContainer) {
-		this.stepCount = 0;
+		this.step = {
+			loop: 0,
+			compare: 0,
+			swap: 0
+		};
 		this.listContainer = listContainer;
 	}
 	
@@ -39,16 +43,20 @@ export default class SelectionSort {
 
 			// 最小値・最小インデックスの更新
 			for (let j = pointer; j < sortList.length; j++) {
+				
+				this.step.compare ++;
 				if (min > sortList[j]) {
 					min = sortList[j];
 					minIndex = j;
 				}
 				
-				this.stepCount ++;
+				this.step.loop ++;
 			}
 
 			// 入れ替え
 			[sortList[pointer], sortList[minIndex]] = [sortList[minIndex], sortList[pointer]];
+			
+			this.step.swap ++;
 			
 			pointer ++;
 
@@ -59,7 +67,7 @@ export default class SelectionSort {
 	}
 	
 	getStep() {
-		return this.stepCount;
+		return this.step;
 	}
 	
 }

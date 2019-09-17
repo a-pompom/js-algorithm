@@ -12,7 +12,11 @@ export default class BubbleSort {
 	
 	constructor(listContainer) {
 		this.listContainer = listContainer;
-		this.stepCount = 0;
+		this.step = {
+			loop: 0,
+			compare: 0,
+			swap: 0
+		};
 	}
 	
 	sort() {
@@ -30,12 +34,14 @@ export default class BubbleSort {
 				let current = j
 				let prev = j - 1;
 				
+				this.step.compare ++;
 				if (sortList[prev] > sortList[current]) {
 					
 					[sortList[current], sortList[prev]] = [sortList[prev], sortList[current]];
+					this.step.swap ++;
 				}
 				
-				this.stepCount ++;
+				this.step.loop ++;
 				
 			}
 			
@@ -47,6 +53,6 @@ export default class BubbleSort {
 	}
 	
 	getStep() {
-		return this.stepCount;
+		return this.step;
 	}
 }

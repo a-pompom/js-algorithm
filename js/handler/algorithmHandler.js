@@ -27,7 +27,7 @@ export default class AlgorithmHandler extends EventHandler{
 		this.currentSort = null;
 		
 		// デフォルトのアルゴリズムを設定
-		this.overrideSortAlgorithm('BubbleSort');
+		this.overrideSortAlgorithm('SelectionSort');
 		this.overrideSearchAlgorithm('LinearSearch');
 		
 		let funcList = [this.searchButtonClick, this.sortButtonClick];
@@ -89,7 +89,9 @@ export default class AlgorithmHandler extends EventHandler{
 			Dom.appendItem(this.listContainer.itemList);
 		});
 		
-		Dom.setMessage('resultStepCount', SortAlgorithm.getStep());
+		Dom.setMessage('stepLoop', SortAlgorithm.getStep().loop);
+		Dom.setMessage('stepCompare', SortAlgorithm.getStep().compare);
+		Dom.setMessage('stepSwap', SortAlgorithm.getStep().swap);
 		
 	}
 	
