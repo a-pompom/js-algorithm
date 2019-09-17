@@ -12,6 +12,7 @@ export default class BubbleSort {
 	
 	constructor(listContainer) {
 		this.listContainer = listContainer;
+		this.stepCount = 0;
 	}
 	
 	sort() {
@@ -34,6 +35,8 @@ export default class BubbleSort {
 					[sortList[current], sortList[prev]] = [sortList[prev], sortList[current]];
 				}
 				
+				this.stepCount ++;
+				
 			}
 			
 			pointer ++;
@@ -41,5 +44,9 @@ export default class BubbleSort {
 		}
 		
 		return sortList;
+	}
+	
+	getStep() {
+		return this.stepCount;
 	}
 }

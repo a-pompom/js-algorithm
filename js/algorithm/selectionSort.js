@@ -17,6 +17,7 @@
 export default class SelectionSort {
 	
 	constructor(listContainer) {
+		this.stepCount = 0;
 		this.listContainer = listContainer;
 	}
 	
@@ -42,6 +43,8 @@ export default class SelectionSort {
 					min = sortList[j];
 					minIndex = j;
 				}
+				
+				this.stepCount ++;
 			}
 
 			// 入れ替え
@@ -53,6 +56,10 @@ export default class SelectionSort {
 		
 		return sortList;
 		
+	}
+	
+	getStep() {
+		return this.stepCount;
 	}
 	
 }

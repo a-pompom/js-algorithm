@@ -89,6 +89,8 @@ export default class AlgorithmHandler extends EventHandler{
 			Dom.appendItem(this.listContainer.itemList);
 		});
 		
+		Dom.setMessage('resultStepCount', SortAlgorithm.getStep());
+		
 	}
 	
 }
