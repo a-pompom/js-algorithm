@@ -4,6 +4,8 @@ import EventHandler from './eventHandler.js';
 
 import LinearSearch from '../algorithm/linearSearch.js';
 import SelectionSort from '../algorithm/selectionSort.js';
+import BubbleSort from '../algorithm/bubbleSort.js';
+import InsertionSort from '../algorithm/insertionSort.js';
 
 /**
 *
@@ -19,14 +21,14 @@ export default class AlgorithmHandler extends EventHandler{
 		
 		// 呼び出し可能なアルゴリズム
 		this.SearchAlgorithmList = {LinearSearch};
-		this.SortAlgorithmList = {SelectionSort};
+		this.SortAlgorithmList = {SelectionSort, BubbleSort, InsertionSort};
 		
 		// ソート・探索イベント発火時に実行されるアルゴリズム
 		this.currentSearch = null;
 		this.currentSort = null;
 		
 		// デフォルトのアルゴリズムを設定
-		this.overrideSortAlgorithm('SelectionSort');
+		this.overrideSortAlgorithm('InsertionSort');
 		this.overrideSearchAlgorithm('LinearSearch');
 		
 		let funcList = [this.searchButtonClick, this.sortButtonClick];
@@ -87,6 +89,10 @@ export default class AlgorithmHandler extends EventHandler{
 			this.listContainer.itemList.push(element);
 			Dom.appendItem(this.listContainer.itemList);
 		});
+		
+		Dom.setMessage('stepLoop', SortAlgorithm.getStep().loop);
+		Dom.setMessage('stepCompare', SortAlgorithm.getStep().compare);
+		Dom.setMessage('stepSwap', SortAlgorithm.getStep().swap);
 		
 	}
 	
