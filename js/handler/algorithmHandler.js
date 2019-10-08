@@ -6,6 +6,7 @@ import LinearSearch from '../algorithm/linearSearch.js';
 import SelectionSort from '../algorithm/selectionSort.js';
 import BubbleSort from '../algorithm/bubbleSort.js';
 import InsertionSort from '../algorithm/insertionSort.js';
+import QuickSort from '../algorithm/quickSort.js';
 
 /**
 *
@@ -21,14 +22,14 @@ export default class AlgorithmHandler extends EventHandler{
 		
 		// 呼び出し可能なアルゴリズム
 		this.SearchAlgorithmList = {LinearSearch};
-		this.SortAlgorithmList = {SelectionSort, BubbleSort, InsertionSort};
+		this.SortAlgorithmList = {SelectionSort, BubbleSort, InsertionSort, QuickSort};
 		
 		// ソート・探索イベント発火時に実行されるアルゴリズム
 		this.currentSearch = null;
 		this.currentSort = null;
 		
 		// デフォルトのアルゴリズムを設定
-		this.overrideSortAlgorithm('InsertionSort');
+		this.overrideSortAlgorithm('QuickSort');
 		this.overrideSearchAlgorithm('LinearSearch');
 		
 		let funcList = [this.searchButtonClick, this.sortButtonClick];
